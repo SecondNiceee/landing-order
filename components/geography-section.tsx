@@ -6,46 +6,46 @@ import { AnimatedText, AnimatedSection } from "./animated-section"
 
 // City coordinates on the map (relative to viewBox 0 0 1200 550)
 const cities = [
-  // Northwest
-  { x: 85, y: 280, name: "Калининград" },
-  { x: 195, y: 130, name: "Мурманск" },
-  { x: 200, y: 210, name: "Санкт-Петербург" },
-  { x: 310, y: 160, name: "Архангельск" },
+  // Northwest - adjusted to fit inside map
+  { x: 155, y: 280, name: "Калининград" },
+  { x: 210, y: 175, name: "Мурманск" },
+  { x: 205, y: 240, name: "Санкт-Петербург" },
+  { x: 320, y: 190, name: "Архангельск" },
   
   // Central
-  { x: 250, y: 275, name: "Москва", isHub: true },
-  { x: 310, y: 240, name: "Ярославль" },
-  { x: 195, y: 320, name: "Брянск" },
+  { x: 255, y: 295, name: "Москва", isHub: true },
+  { x: 315, y: 265, name: "Ярославль" },
+  { x: 210, y: 340, name: "Брянск" },
   
   // South
-  { x: 260, y: 360, name: "Воронеж" },
-  { x: 245, y: 420, name: "Ростов-на-Дону" },
-  { x: 230, y: 475, name: "Краснодар" },
-  { x: 310, y: 400, name: "Волгоград" },
+  { x: 265, y: 370, name: "Воронеж" },
+  { x: 260, y: 420, name: "Ростов-на-Дону" },
+  { x: 250, y: 465, name: "Краснодар" },
+  { x: 330, y: 400, name: "Волгоград" },
   
   // Volga-Ural
-  { x: 340, y: 285, name: "Нижний Новгород" },
-  { x: 395, y: 295, name: "Казань" },
-  { x: 420, y: 340, name: "Самара" },
-  { x: 465, y: 265, name: "Пермь" },
-  { x: 530, y: 295, name: "Екатеринбург" },
-  { x: 520, y: 345, name: "Челябинск" },
-  { x: 575, y: 305, name: "Тюмень" },
+  { x: 350, y: 300, name: "Нижний Новгород" },
+  { x: 405, y: 310, name: "Казань" },
+  { x: 430, y: 355, name: "Самара" },
+  { x: 475, y: 280, name: "Пермь" },
+  { x: 540, y: 310, name: "Екатеринбург" },
+  { x: 530, y: 360, name: "Челябинск" },
+  { x: 585, y: 320, name: "Тюмень" },
   
   // Siberia
-  { x: 660, y: 330, name: "Омск" },
-  { x: 730, y: 295, name: "Томск" },
-  { x: 740, y: 350, name: "Новосибирск" },
-  { x: 830, y: 340, name: "Красноярск" },
+  { x: 665, y: 345, name: "Омск" },
+  { x: 735, y: 310, name: "Томск" },
+  { x: 745, y: 365, name: "Новосибирск" },
+  { x: 835, y: 355, name: "Красноярск" },
   
-  // Far East
-  { x: 985, y: 220, name: "Якутск" },
-  { x: 1085, y: 360, name: "Хабаровск" },
-  { x: 1115, y: 440, name: "Владивосток" },
+  // Far East - moved inside map boundaries
+  { x: 960, y: 240, name: "Якутск" },
+  { x: 1050, y: 365, name: "Хабаровск" },
+  { x: 1080, y: 430, name: "Владивосток" },
 ]
 
 // Murom coordinates (central hub)
-const murom = { x: 305, y: 280, name: "Муром" }
+const murom = { x: 315, y: 300, name: "Муром" }
 
 // Curve offsets for each city to avoid overlaps (positive = curve up/left, negative = curve down/right)
 const curveOffsets: { [key: string]: { intensity: number; direction: number } } = {
@@ -106,23 +106,23 @@ function generateCurvedPath(from: { x: number; y: number }, to: { x: number; y: 
   return `M ${from.x} ${from.y} Q ${ctrlX} ${ctrlY} ${to.x} ${to.y}`
 }
 
-// Russia map outline path - more realistic shape without Kaliningrad exclave
+// Russia map outline path - realistic shape with all cities inside
 const russiaPath = `
-  M 150,240 
-  L 145,220 L 155,200 L 175,185 L 195,175 L 180,155 L 200,135 
-  L 225,125 L 255,115 L 285,105 L 320,100 L 360,105 L 410,115 
-  L 455,105 L 505,100 L 555,105 L 605,100 L 655,95 L 705,90 
-  L 755,95 L 805,100 L 855,95 L 905,105 L 955,125 L 1005,155 
-  L 1055,180 L 1100,205 L 1125,235 L 1135,270 L 1145,315 
-  L 1135,355 L 1115,395 L 1095,425 L 1125,455 L 1135,485 
-  L 1115,505 L 1075,485 L 1045,455 L 1015,435 L 975,425 
-  L 945,445 L 915,435 L 875,425 L 845,430 L 815,420 L 775,425 
-  L 735,435 L 695,425 L 655,415 L 615,425 L 575,415 
-  L 535,425 L 495,435 L 455,425 L 415,415 L 375,425 
-  L 335,435 L 295,445 L 255,465 L 225,485 L 195,495 
-  L 175,485 L 155,465 L 145,435 L 155,405 L 175,375 
-  L 165,345 L 135,335 L 115,315 L 120,290 L 135,265 
-  L 150,240 Z
+  M 145,270 
+  L 140,250 L 150,230 L 165,210 L 180,195 L 175,175 L 195,160 
+  L 225,150 L 260,140 L 295,130 L 340,125 L 390,130 L 440,140 
+  L 490,130 L 545,125 L 600,130 L 655,125 L 715,120 L 775,125 
+  L 835,130 L 895,135 L 955,155 L 1010,185 L 1060,215 
+  L 1100,250 L 1115,290 L 1120,340 L 1115,385 
+  L 1095,420 L 1080,450 L 1095,475 L 1085,500 
+  L 1055,490 L 1020,465 L 985,450 L 945,455 
+  L 905,445 L 865,440 L 825,445 L 785,440 L 745,450 
+  L 705,445 L 665,435 L 625,445 L 585,435 
+  L 545,445 L 505,455 L 465,445 L 425,435 L 385,445 
+  L 345,455 L 305,465 L 265,480 L 235,495 L 210,505 
+  L 185,495 L 165,475 L 155,450 L 165,420 L 180,390 
+  L 175,365 L 155,350 L 140,330 L 135,305 L 140,285 
+  L 145,270 Z
 `
 
 export function GeographySection() {

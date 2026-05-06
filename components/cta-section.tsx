@@ -13,21 +13,21 @@ export function CTASection() {
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         {/* Blue glowing circles */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.6 }}
-          transition={{ duration: 1 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 0.6, scale: 1 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="absolute top-1/4 left-1/6 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]"
         />
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.5 }}
-          transition={{ duration: 1, delay: 0.2 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 0.5, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="absolute bottom-1/4 right-1/6 w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-[100px]"
         />
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.4 }}
-          transition={{ duration: 1, delay: 0.4 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 0.4, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sky-500/15 rounded-full blur-[150px]"
         />
       </div>
@@ -42,9 +42,9 @@ export function CTASection() {
             <div className="relative text-center">
               {/* Badge */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
               >
                 <Sparkles className="w-4 h-4 text-primary" />
