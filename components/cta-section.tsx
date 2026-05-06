@@ -78,17 +78,20 @@ export function CTASection() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button
+                    asChild
                     size="lg"
                     className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-10 rounded-full shadow-xl shadow-primary/30 h-16 text-lg group"
                   >
-                    Оформить заявку
-                    <motion.span
-                      className="ml-2"
-                      initial={{ x: 0 }}
-                      whileHover={{ x: 4 }}
-                    >
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </motion.span>
+                    <a href="https://price-mvsp.ru/" target="_blank" rel="noopener noreferrer">
+                      Оформить заявку
+                      <motion.span
+                        className="ml-2"
+                        initial={{ x: 0 }}
+                        whileHover={{ x: 4 }}
+                      >
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </motion.span>
+                    </a>
                   </Button>
                 </motion.div>
               </AnimatedSection>
