@@ -156,12 +156,12 @@ export function GeographySection() {
 
         {/* Map Container */}
         <AnimatedSection delay={0.3}>
-          <div className="relative rounded-3xl overflow-hidden border border-border/50 bg-card/30 backdrop-blur-sm">
+          <div className="relative rounded-3xl overflow-hidden border border-border/50 bg-card/30 backdrop-blur-sm flex items-center justify-center p-4 md:p-6">
             {/* SVG Map */}
-            <div className="relative aspect-[4/3] md:aspect-[16/9] p-2 md:p-4">
+            <div className="relative w-full max-w-5xl">
               <svg
-                viewBox="100 100 1050 450"
-                className="w-full h-full"
+                viewBox="120 110 1020 420"
+                className="w-full h-auto"
                 preserveAspectRatio="xMidYMid meet"
               >
                 <defs>
