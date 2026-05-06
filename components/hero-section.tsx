@@ -24,52 +24,6 @@ export function HeroSection() {
 
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Floating gradient orbs - STRONGER */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: [0.4, 0.8, 0.4],
-            scale: [1, 1.4, 1],
-            x: [0, 80, 0],
-            y: [0, -60, 0]
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/40 rounded-full blur-3xl"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: [0.3, 0.7, 0.3],
-            scale: [1, 1.5, 1],
-            x: [0, -100, 0],
-            y: [0, 80, 0]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-          className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-accent/40 rounded-full blur-3xl"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: [0.2, 0.6, 0.2],
-            scale: [1, 1.3, 1],
-            x: [0, 50, 0],
-            y: [0, -40, 0]
-          }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-          className="absolute top-1/2 right-1/3 w-[400px] h-[400px] bg-primary/35 rounded-full blur-3xl"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: [0.25, 0.55, 0.25],
-            scale: [1, 1.2, 1],
-            x: [0, -60, 0],
-            y: [0, 50, 0]
-          }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/3 left-1/2 w-[350px] h-[350px] bg-accent/35 rounded-full blur-3xl"
-        />
-
         {/* Glowing lines - STRONGER */}
         <motion.div
           initial={{ opacity: 0, x: "-100%" }}
