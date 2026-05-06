@@ -4,87 +4,87 @@ import { motion } from "framer-motion"
 import { MapPin } from "lucide-react"
 import { AnimatedText, AnimatedSection } from "./animated-section"
 
-// City coordinates on the map (relative to viewBox 0 0 1200 600)
+// City coordinates on the map (relative to viewBox 0 0 1200 550)
 const cities = [
-  // Northwest
-  { x: 85, y: 280, name: "Калининград" },
-  { x: 235, y: 95, name: "Мурманск" },
-  { x: 200, y: 195, name: "Санкт-Петербург" },
-  { x: 310, y: 145, name: "Архангельск" },
+  // Northwest - adjusted to fit inside map
+  { x: 155, y: 280, name: "Калининград" },
+  { x: 210, y: 175, name: "Мурманск" },
+  { x: 205, y: 240, name: "Санкт-Петербург" },
+  { x: 320, y: 190, name: "Архангельск" },
   
   // Central
-  { x: 250, y: 275, name: "Москва", isHub: true },
-  { x: 310, y: 240, name: "Ярославль" },
-  { x: 195, y: 320, name: "Брянск" },
+  { x: 255, y: 295, name: "Москва", isHub: true },
+  { x: 315, y: 265, name: "Ярославль" },
+  { x: 210, y: 340, name: "Брянск" },
   
   // South
-  { x: 260, y: 360, name: "Воронеж" },
-  { x: 245, y: 420, name: "Ростов-на-Дону" },
-  { x: 230, y: 475, name: "Краснодар" },
-  { x: 310, y: 400, name: "Волгоград" },
+  { x: 265, y: 370, name: "Воронеж" },
+  { x: 260, y: 420, name: "Ростов-на-Дону" },
+  { x: 250, y: 465, name: "Краснодар" },
+  { x: 330, y: 400, name: "Волгоград" },
   
   // Volga-Ural
-  { x: 340, y: 285, name: "Нижний Новгород" },
-  { x: 395, y: 295, name: "Казань" },
-  { x: 420, y: 340, name: "Самара" },
-  { x: 465, y: 265, name: "Пермь" },
-  { x: 530, y: 295, name: "Екатеринбург" },
-  { x: 520, y: 345, name: "Челябинск" },
-  { x: 575, y: 305, name: "Тюмень" },
+  { x: 350, y: 300, name: "Нижний Новгород" },
+  { x: 405, y: 310, name: "Казань" },
+  { x: 430, y: 355, name: "Самара" },
+  { x: 475, y: 280, name: "Пермь" },
+  { x: 540, y: 310, name: "Екатеринбург" },
+  { x: 530, y: 360, name: "Челябинск" },
+  { x: 585, y: 320, name: "Тюмень" },
   
   // Siberia
-  { x: 660, y: 330, name: "Омск" },
-  { x: 730, y: 295, name: "Томск" },
-  { x: 740, y: 350, name: "Новосибирск" },
-  { x: 830, y: 340, name: "Красноярск" },
+  { x: 665, y: 345, name: "Омск" },
+  { x: 735, y: 310, name: "Томск" },
+  { x: 745, y: 365, name: "Новосибирск" },
+  { x: 835, y: 355, name: "Красноярск" },
   
-  // Far East
-  { x: 985, y: 220, name: "Якутск" },
-  { x: 1085, y: 360, name: "Хабаровск" },
-  { x: 1115, y: 440, name: "Владивосток" },
+  // Far East - moved inside map boundaries
+  { x: 960, y: 240, name: "Якутск" },
+  { x: 1050, y: 365, name: "Хабаровск" },
+  { x: 1080, y: 430, name: "Владивосток" },
 ]
 
 // Murom coordinates (central hub)
-const murom = { x: 305, y: 280, name: "Муром" }
+const murom = { x: 315, y: 300, name: "Муром" }
 
 // Curve offsets for each city to avoid overlaps (positive = curve up/left, negative = curve down/right)
 const curveOffsets: { [key: string]: { intensity: number; direction: number } } = {
-  // Northwest - curve upward to avoid crossing
-  "Калининград": { intensity: 0.5, direction: -1 },
-  "Мурманск": { intensity: 0.3, direction: 1 },
-  "Санкт-Петербург": { intensity: 0.35, direction: -1 },
-  "Архангельск": { intensity: 0.4, direction: 1 },
+  // Northwest - larger curves for outer cities
+  "Калининград": { intensity: 0.85, direction: 1 },
+  "Мурманск": { intensity: 0.65, direction: -1 },
+  "Санкт-Петербург": { intensity: 0.45, direction: 1 },
+  "Архангельск": { intensity: 0.55, direction: -1 },
   
-  // Central - small curves
-  "Москва": { intensity: 0.6, direction: -1 },
-  "Ярославль": { intensity: 0.5, direction: 1 },
-  "Брянск": { intensity: 0.45, direction: 1 },
+  // Central - smaller curves, spread apart
+  "Москва": { intensity: 0.75, direction: 1 },
+  "Ярославль": { intensity: 0.3, direction: -1 },
+  "Брянск": { intensity: 0.7, direction: -1 },
   
-  // South - alternate to avoid crossing
-  "Воронеж": { intensity: 0.35, direction: -1 },
-  "Ростов-на-Дону": { intensity: 0.4, direction: 1 },
-  "Краснодар": { intensity: 0.5, direction: -1 },
-  "Волгоград": { intensity: 0.35, direction: 1 },
+  // South - alternate to avoid crossing with larger offsets
+  "Воронеж": { intensity: 0.5, direction: 1 },
+  "Ростов-на-Дону": { intensity: 0.65, direction: -1 },
+  "Краснодар": { intensity: 0.8, direction: 1 },
+  "Волгоград": { intensity: 0.4, direction: -1 },
   
-  // Volga-Ural - spread out curves
-  "Нижний Новгород": { intensity: 0.4, direction: -1 },
-  "Казань": { intensity: 0.25, direction: 1 },
-  "Самара": { intensity: 0.35, direction: -1 },
-  "Пермь": { intensity: 0.3, direction: 1 },
-  "Екатеринбург": { intensity: 0.2, direction: -1 },
-  "Челябинск": { intensity: 0.35, direction: 1 },
-  "Тюмень": { intensity: 0.25, direction: -1 },
+  // Volga-Ural - spread out curves more
+  "Нижний Новгород": { intensity: 0.25, direction: 1 },
+  "Казань": { intensity: 0.35, direction: -1 },
+  "Самара": { intensity: 0.45, direction: 1 },
+  "Пермь": { intensity: 0.5, direction: -1 },
+  "Екатеринбург": { intensity: 0.35, direction: 1 },
+  "Челябинск": { intensity: 0.55, direction: -1 },
+  "Тюмень": { intensity: 0.4, direction: 1 },
   
-  // Siberia - larger curves for longer distances
-  "Омск": { intensity: 0.2, direction: 1 },
-  "Томск": { intensity: 0.15, direction: -1 },
-  "Новосибирск": { intensity: 0.25, direction: 1 },
-  "Красноярск": { intensity: 0.18, direction: -1 },
+  // Siberia - larger curves for longer distances, alternate directions
+  "Омск": { intensity: 0.3, direction: -1 },
+  "Томск": { intensity: 0.25, direction: 1 },
+  "Новосибирск": { intensity: 0.4, direction: -1 },
+  "Красноярск": { intensity: 0.3, direction: 1 },
   
-  // Far East - distinct curves
-  "Якутск": { intensity: 0.2, direction: 1 },
-  "Хабаровск": { intensity: 0.15, direction: -1 },
-  "Владивосток": { intensity: 0.22, direction: 1 },
+  // Far East - distinct curves with larger offsets
+  "Якутск": { intensity: 0.35, direction: -1 },
+  "Хабаровск": { intensity: 0.25, direction: 1 },
+  "Владивосток": { intensity: 0.4, direction: -1 },
 }
 
 // Generate curved path between two points with custom intensity and direction
@@ -106,26 +106,23 @@ function generateCurvedPath(from: { x: number; y: number }, to: { x: number; y: 
   return `M ${from.x} ${from.y} Q ${ctrlX} ${ctrlY} ${to.x} ${to.y}`
 }
 
-// Russia map outline path (simplified but recognizable)
+// Russia map outline path - realistic shape with all cities inside
 const russiaPath = `
-  M 70,290 
-  L 60,270 L 55,250 L 70,230 L 90,220 L 85,200 L 100,180 
-  L 130,170 L 160,155 L 180,140 L 200,130 L 220,115 L 250,100 
-  L 280,90 L 310,85 L 350,95 L 400,110 L 450,100 L 500,95 
-  L 550,100 L 600,95 L 650,90 L 700,85 L 750,90 L 800,100 
-  L 850,95 L 900,100 L 950,120 L 1000,150 L 1050,180 
-  L 1100,200 L 1130,230 L 1140,270 L 1150,310 L 1140,350 
-  L 1120,390 L 1100,420 L 1130,450 L 1140,480 L 1120,500 
-  L 1080,480 L 1050,450 L 1020,430 L 980,420 L 950,440 
-  L 920,430 L 880,420 L 850,430 L 820,420 L 780,430 
-  L 740,440 L 700,430 L 660,420 L 620,430 L 580,420 
-  L 540,430 L 500,440 L 460,430 L 420,420 L 380,430 
-  L 340,440 L 300,450 L 260,470 L 230,490 L 200,500 
-  L 180,490 L 160,470 L 150,440 L 160,410 L 180,380 
-  L 170,350 L 140,340 L 120,320 L 100,310 L 80,300 
-  L 70,290 Z
-  
-  M 60,280 L 45,275 L 35,290 L 45,310 L 60,305 L 70,290 Z
+  M 145,270 
+  L 140,250 L 150,230 L 165,210 L 180,195 L 175,175 L 195,160 
+  L 225,150 L 260,140 L 295,130 L 340,125 L 390,130 L 440,140 
+  L 490,130 L 545,125 L 600,130 L 655,125 L 715,120 L 775,125 
+  L 835,130 L 895,135 L 955,155 L 1010,185 L 1060,215 
+  L 1100,250 L 1115,290 L 1120,340 L 1115,385 
+  L 1095,420 L 1080,450 L 1095,475 L 1085,500 
+  L 1055,490 L 1020,465 L 985,450 L 945,455 
+  L 905,445 L 865,440 L 825,445 L 785,440 L 745,450 
+  L 705,445 L 665,435 L 625,445 L 585,435 
+  L 545,445 L 505,455 L 465,445 L 425,435 L 385,445 
+  L 345,455 L 305,465 L 265,480 L 235,495 L 210,505 
+  L 185,495 L 165,475 L 155,450 L 165,420 L 180,390 
+  L 175,365 L 155,350 L 140,330 L 135,305 L 140,285 
+  L 145,270 Z
 `
 
 export function GeographySection() {

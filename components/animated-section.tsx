@@ -25,13 +25,17 @@ export function AnimatedSection({
   const variants = {
     hidden: {
       opacity: 0,
-      y: direction === "up" ? 60 : direction === "down" ? -60 : 0,
-      x: direction === "left" ? 60 : direction === "right" ? -60 : 0,
+      y: direction === "up" ? 80 : direction === "down" ? -80 : 0,
+      x: direction === "left" ? 80 : direction === "right" ? -80 : 0,
+      scale: 0.95,
+      filter: "blur(8px)",
     },
     visible: {
       opacity: 1,
       y: 0,
       x: 0,
+      scale: 1,
+      filter: "blur(0px)",
     },
   }
 
@@ -42,9 +46,9 @@ export function AnimatedSection({
       animate={inView ? "visible" : "hidden"}
       variants={variants}
       transition={{
-        duration: 0.8,
+        duration: 0.9,
         delay: delay,
-        ease: [0.25, 0.4, 0.25, 1],
+        ease: [0.22, 1, 0.36, 1],
       }}
       className={className}
     >
@@ -70,12 +74,12 @@ export function AnimatedText({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 50, filter: "blur(6px)" }}
+      animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 50, filter: "blur(6px)" }}
       transition={{
-        duration: 0.6,
+        duration: 0.8,
         delay: delay,
-        ease: [0.25, 0.4, 0.25, 1],
+        ease: [0.22, 1, 0.36, 1],
       }}
       className={className}
     >
@@ -87,7 +91,7 @@ export function AnimatedText({
 export function StaggerChildren({
   children,
   className = "",
-  staggerDelay = 0.1,
+  staggerDelay = 0.12,
 }: {
   children: ReactNode
   className?: string
@@ -128,14 +132,15 @@ export function StaggerItem({
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 40, scale: 0.95 },
+        hidden: { opacity: 0, y: 60, scale: 0.9, filter: "blur(8px)" },
         visible: {
           opacity: 1,
           y: 0,
           scale: 1,
+          filter: "blur(0px)",
           transition: {
-            duration: 0.5,
-            ease: [0.25, 0.4, 0.25, 1],
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1],
           },
         },
       }}

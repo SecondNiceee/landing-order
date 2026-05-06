@@ -34,11 +34,12 @@ export function ContactsSection() {
             </AnimatedText>
 
             {/* Contact Info */}
-            <StaggerChildren className="space-y-6" staggerDelay={0.1}>
+            <StaggerChildren className="space-y-6" staggerDelay={0.15}>
               <StaggerItem>
                 <motion.a
                   href="tel:+79995448055"
-                  whileHover={{ x: 4 }}
+                  whileHover={{ x: 8, scale: 1.02 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="flex items-center gap-4 group"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -56,7 +57,8 @@ export function ContactsSection() {
               <StaggerItem>
                 <motion.a
                   href="mailto:vsp@lsknn.ru"
-                  whileHover={{ x: 4 }}
+                  whileHover={{ x: 8, scale: 1.02 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="flex items-center gap-4 group"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
@@ -73,7 +75,8 @@ export function ContactsSection() {
 
               <StaggerItem>
                 <motion.div
-                  whileHover={{ x: 4 }}
+                  whileHover={{ x: 8, scale: 1.02 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="flex items-start gap-4 group"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -97,7 +100,8 @@ export function ContactsSection() {
           <AnimatedSection delay={0.3} direction="left">
             <div className="relative h-full">
               <motion.div
-                whileHover={{ y: -4 }}
+                whileHover={{ y: -8, scale: 1.01 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="relative p-8 md:p-10 rounded-3xl bg-gradient-to-br from-card via-card/90 to-primary/10 border border-primary/30 h-full shadow-[0_0_40px_rgba(56,189,248,0.15)]"
               >
                 {/* Decorative Glow Elements */}

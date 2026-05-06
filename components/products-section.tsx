@@ -67,8 +67,8 @@ export function ProductsSection() {
           {products.map((product) => (
             <StaggerItem key={product.title}>
               <motion.div
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ y: -12, scale: 1.02 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="group relative h-full cursor-pointer"
               >
                 <div className="relative overflow-hidden rounded-2xl bg-card border border-border/50 h-full">

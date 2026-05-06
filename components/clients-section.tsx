@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import Image from "next/image"
 import { AnimatedSection, AnimatedText } from "./animated-section"
 
@@ -54,10 +55,18 @@ export function ClientsSection() {
         <AnimatedSection delay={0.3}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {clients.map((client, index) => (
-              <div
+              <motion.div
                 key={client.name}
+                initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: 0.3 + index * 0.1,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+                whileHover={{ y: -8, scale: 1.05 }}
+                viewport={{ once: true }}
                 className="group relative flex items-center justify-center p-6 md:p-8 rounded-2xl bg-card/30 border border-border/30 hover:border-primary/30 hover:bg-card/50 transition-all duration-300 cursor-pointer"
-                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="relative w-full h-16 md:h-20 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
                   <Image
@@ -70,7 +79,7 @@ export function ClientsSection() {
                 
                 {/* Hover Glow */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              </div>
+              </motion.div>
             ))}
           </div>
         </AnimatedSection>
