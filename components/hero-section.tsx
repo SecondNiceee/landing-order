@@ -24,124 +24,34 @@ export function HeroSection() {
 
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Floating gradient orbs */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: [0.3, 0.6, 0.3],
-            scale: [1, 1.2, 1],
-            x: [0, 30, 0],
-            y: [0, -20, 0]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: [0.2, 0.5, 0.2],
-            scale: [1, 1.3, 1],
-            x: [0, -40, 0],
-            y: [0, 30, 0]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/20 rounded-full blur-3xl"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: [0.1, 0.3, 0.1],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/2 right-1/3 w-64 h-64 bg-primary/15 rounded-full blur-3xl"
-        />
-
-        {/* Animated particles */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ 
-              opacity: 0,
-              x: Math.random() * 100 + "%",
-              y: "100%"
-            }}
-            animate={{ 
-              opacity: [0, 0.8, 0],
-              y: "-10%"
-            }}
-            transition={{ 
-              duration: Math.random() * 8 + 6,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: "linear"
-            }}
-            className="absolute w-1 h-1 bg-primary/60 rounded-full"
-            style={{ left: `${Math.random() * 100}%` }}
-          />
-        ))}
-
-        {/* Glowing lines */}
+        {/* Glowing lines - STRONGER */}
         <motion.div
           initial={{ opacity: 0, x: "-100%" }}
-          animate={{ opacity: [0, 0.5, 0], x: "200%" }}
-          transition={{ duration: 4, repeat: Infinity, repeatDelay: 3 }}
-          className="absolute top-1/3 w-32 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent blur-sm"
+          animate={{ opacity: [0, 1, 0], x: "200%" }}
+          transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
+          className="absolute top-1/3 w-64 h-[3px] bg-gradient-to-r from-transparent via-primary to-transparent blur-[2px]"
         />
         <motion.div
           initial={{ opacity: 0, x: "200%" }}
-          animate={{ opacity: [0, 0.4, 0], x: "-100%" }}
-          transition={{ duration: 5, repeat: Infinity, repeatDelay: 4, delay: 2 }}
-          className="absolute top-2/3 w-48 h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent blur-sm"
+          animate={{ opacity: [0, 0.9, 0], x: "-100%" }}
+          transition={{ duration: 4, repeat: Infinity, repeatDelay: 3, delay: 1 }}
+          className="absolute top-2/3 w-80 h-[3px] bg-gradient-to-r from-transparent via-accent to-transparent blur-[2px]"
         />
-
-        {/* Grid pattern overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.3) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(56, 189, 248, 0.3) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}
-        />
-
-        {/* Animated rail track lines */}
-        <svg className="absolute bottom-0 left-0 w-full h-32 opacity-20" viewBox="0 0 1200 100" preserveAspectRatio="none">
-          <motion.path
-            d="M0,50 L1200,50"
-            stroke="url(#railGradient)"
-            strokeWidth="2"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, ease: "easeOut" }}
-          />
-          <motion.path
-            d="M0,60 L1200,60"
-            stroke="url(#railGradient)"
-            strokeWidth="2"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, delay: 0.3, ease: "easeOut" }}
-          />
-          <defs>
-            <linearGradient id="railGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="transparent" />
-              <stop offset="20%" stopColor="oklch(0.65 0.18 230)" />
-              <stop offset="50%" stopColor="oklch(0.55 0.2 210)" />
-              <stop offset="80%" stopColor="oklch(0.65 0.18 230)" />
-              <stop offset="100%" stopColor="transparent" />
-            </linearGradient>
-          </defs>
-        </svg>
-
-        {/* Radial glow in center */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-primary/10 via-transparent to-transparent rounded-full"
+          initial={{ opacity: 0, x: "-100%" }}
+          animate={{ opacity: [0, 0.8, 0], x: "200%" }}
+          transition={{ duration: 3.5, repeat: Infinity, repeatDelay: 2.5, delay: 2 }}
+          className="absolute top-1/2 w-48 h-[3px] bg-gradient-to-r from-transparent via-primary to-transparent blur-[2px]"
+        />
+
+        {/* Grid pattern overlay - STRONGER */}
+        <div 
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(56, 189, 248, 0.5) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px'
+          }}
         />
       </div>
 

@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import {
   ShieldCheck,
   Package,
@@ -52,10 +53,41 @@ export function AboutSection() {
   return (
     <section id="about" className="py-16 md:py-20 relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-        <div className="absolute top-1/3 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-30" />
+        
+        {/* Floating gradient orbs - optimized with will-change and GPU acceleration */}
+        <motion.div
+          initial={{ opacity: 0.4 }}
+          animate={{ 
+            opacity: [0.4, 0.7, 0.4],
+            x: [0, 30, 0],
+            y: [0, -25, 0]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 left-[10%] w-[200px] h-[200px] bg-primary/35 rounded-full blur-3xl will-change-transform"
+        />
+        <motion.div
+          initial={{ opacity: 0.3 }}
+          animate={{ 
+            opacity: [0.3, 0.6, 0.3],
+            x: [0, -35, 0],
+            y: [0, 30, 0]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute bottom-1/4 right-[10%] w-[200px] h-[200px] bg-accent/35 rounded-full blur-3xl will-change-transform"
+        />
+        <motion.div
+          initial={{ opacity: 0.25 }}
+          animate={{ 
+            opacity: [0.25, 0.5, 0.25],
+            x: [0, 20, 0],
+            y: [0, -20, 0]
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[200px] h-[200px] bg-primary/30 rounded-full blur-3xl will-change-transform"
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative">
