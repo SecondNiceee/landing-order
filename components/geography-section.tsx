@@ -158,9 +158,9 @@ export function GeographySection() {
         <AnimatedSection delay={0.3}>
           <div className="relative rounded-3xl overflow-hidden border border-border/50 bg-card/30 backdrop-blur-sm">
             {/* SVG Map */}
-            <div className="relative aspect-[16/9] md:aspect-[2/1] p-4 md:p-8">
+            <div className="relative aspect-[4/3] md:aspect-[16/9] p-2 md:p-4">
               <svg
-                viewBox="0 0 1200 550"
+                viewBox="100 100 1050 450"
                 className="w-full h-full"
                 preserveAspectRatio="xMidYMid meet"
               >
@@ -198,7 +198,7 @@ export function GeographySection() {
                   fill="currentColor"
                   fillOpacity="0.05"
                   stroke="currentColor"
-                  strokeWidth="1.5"
+                  strokeWidth="1"
                   className="text-muted-foreground/40"
                 />
 
@@ -220,8 +220,8 @@ export function GeographySection() {
                       d={path}
                       fill="none"
                       stroke="url(#route-gradient)"
-                      strokeWidth="1.5"
-                      strokeDasharray="6 4"
+                      strokeWidth="1"
+                      strokeDasharray="4 3"
                       filter="url(#glow)"
                     />
                   )
