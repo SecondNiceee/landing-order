@@ -47,17 +47,58 @@ const cities = [
 // Murom coordinates (central hub)
 const murom = { x: 305, y: 280, name: "Муром" }
 
-// Generate curved path between two points
-function generateCurvedPath(from: { x: number; y: number }, to: { x: number; y: number }, curveIntensity = 0.2) {
+// Curve offsets for each city to avoid overlaps (positive = curve up/left, negative = curve down/right)
+const curveOffsets: { [key: string]: { intensity: number; direction: number } } = {
+  // Northwest - curve upward to avoid crossing
+  "Калининград": { intensity: 0.5, direction: -1 },
+  "Мурманск": { intensity: 0.3, direction: 1 },
+  "Санкт-Петербург": { intensity: 0.35, direction: -1 },
+  "Архангельск": { intensity: 0.4, direction: 1 },
+  
+  // Central - small curves
+  "Москва": { intensity: 0.6, direction: -1 },
+  "Ярославль": { intensity: 0.5, direction: 1 },
+  "Брянск": { intensity: 0.45, direction: 1 },
+  
+  // South - alternate to avoid crossing
+  "Воронеж": { intensity: 0.35, direction: -1 },
+  "Ростов-на-Дону": { intensity: 0.4, direction: 1 },
+  "Краснодар": { intensity: 0.5, direction: -1 },
+  "Волгоград": { intensity: 0.35, direction: 1 },
+  
+  // Volga-Ural - spread out curves
+  "Нижний Новгород": { intensity: 0.4, direction: -1 },
+  "Казань": { intensity: 0.25, direction: 1 },
+  "Самара": { intensity: 0.35, direction: -1 },
+  "Пермь": { intensity: 0.3, direction: 1 },
+  "Екатеринбург": { intensity: 0.2, direction: -1 },
+  "Челябинск": { intensity: 0.35, direction: 1 },
+  "Тюмень": { intensity: 0.25, direction: -1 },
+  
+  // Siberia - larger curves for longer distances
+  "Омск": { intensity: 0.2, direction: 1 },
+  "Томск": { intensity: 0.15, direction: -1 },
+  "Новосибирск": { intensity: 0.25, direction: 1 },
+  "Красноярск": { intensity: 0.18, direction: -1 },
+  
+  // Far East - distinct curves
+  "Якутск": { intensity: 0.2, direction: 1 },
+  "Хабаровск": { intensity: 0.15, direction: -1 },
+  "Владивосток": { intensity: 0.22, direction: 1 },
+}
+
+// Generate curved path between two points with custom intensity and direction
+function generateCurvedPath(from: { x: number; y: number }, to: { x: number; y: number }, cityName: string) {
   const midX = (from.x + to.x) / 2
   const midY = (from.y + to.y) / 2
   const dx = to.x - from.x
   const dy = to.y - from.y
-  const dist = Math.sqrt(dx * dx + dy * dy)
+  
+  const curve = curveOffsets[cityName] || { intensity: 0.3, direction: 1 }
   
   // Perpendicular offset for curve
-  const offsetX = -dy * curveIntensity * (dist > 200 ? 0.15 : 0.25)
-  const offsetY = dx * curveIntensity * (dist > 200 ? 0.15 : 0.25)
+  const offsetX = -dy * curve.intensity * curve.direction
+  const offsetY = dx * curve.intensity * curve.direction
   
   const ctrlX = midX + offsetX
   const ctrlY = midY + offsetY
@@ -166,8 +207,7 @@ export function GeographySection() {
 
                 {/* Delivery Routes from Murom to all cities */}
                 {cities.map((city, i) => {
-                  const curveDirection = i % 2 === 0 ? 0.15 : -0.15
-                  const path = generateCurvedPath(murom, city, curveDirection)
+                  const path = generateCurvedPath(murom, city, city.name)
                   
                   return (
                     <motion.path
