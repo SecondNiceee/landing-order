@@ -163,3 +163,8 @@ html {
 .stat-item:hover {
   transform: scale(1.05);
 }
+
+/* Radial gradient for hero section */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
