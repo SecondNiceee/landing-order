@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import {
   ShieldCheck,
   Package,
@@ -56,38 +55,6 @@ export function AboutSection() {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-        
-        {/* Floating gradient orbs - optimized with will-change and GPU acceleration */}
-        <motion.div
-          initial={{ opacity: 0.4 }}
-          animate={{ 
-            opacity: [0.4, 0.7, 0.4],
-            x: [0, 30, 0],
-            y: [0, -25, 0]
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-[10%] w-[200px] h-[200px] bg-primary/35 rounded-full blur-3xl will-change-transform"
-        />
-        <motion.div
-          initial={{ opacity: 0.3 }}
-          animate={{ 
-            opacity: [0.3, 0.6, 0.3],
-            x: [0, -35, 0],
-            y: [0, 30, 0]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-1/4 right-[10%] w-[200px] h-[200px] bg-accent/35 rounded-full blur-3xl will-change-transform"
-        />
-        <motion.div
-          initial={{ opacity: 0.25 }}
-          animate={{ 
-            opacity: [0.25, 0.5, 0.25],
-            x: [0, 20, 0],
-            y: [0, -20, 0]
-          }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[200px] h-[200px] bg-primary/30 rounded-full blur-3xl will-change-transform"
-        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative">
@@ -122,7 +89,7 @@ export function AboutSection() {
         >
           {benefits.map((benefit) => (
             <StaggerItem key={benefit.title}>
-              <div className="benefit-card group relative p-6 rounded-2xl bg-card/50 border border-primary/30 hover:border-primary/60 hover:bg-card cursor-pointer">
+              <div className="benefit-card group relative p-6 rounded-2xl bg-card/50 border border-primary/30 hover:border-primary/60 hover:bg-card cursor-pointer h-full flex flex-col">
                 {/* Icon */}
                 <div className="benefit-icon w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center mb-4">
                   <benefit.icon className="w-6 h-6 text-primary" />
