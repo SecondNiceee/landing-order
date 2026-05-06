@@ -99,14 +99,6 @@ export function HeroSection() {
             backgroundSize: '60px 60px'
           }}
         />
-
-        {/* Radial glow in center - STRONGER */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-radial from-primary/25 via-primary/5 to-transparent rounded-full"
-        />
       </div>
 
       {/* Content */}
