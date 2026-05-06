@@ -44,9 +44,9 @@ export function HeroSection() {
           className="absolute top-1/2 w-48 h-[3px] bg-gradient-to-r from-transparent via-primary to-transparent blur-[2px]"
         />
 
-        {/* Grid pattern overlay - STRONGER */}
+        {/* Grid pattern overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.08]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.5) 1px, transparent 1px),
                               linear-gradient(90deg, rgba(56, 189, 248, 0.5) 1px, transparent 1px)`,
