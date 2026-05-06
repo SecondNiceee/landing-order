@@ -27,10 +27,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: [
-      { url: `${siteUrl}/favicon.ico`, sizes: 'any' },
-      { url: `${siteUrl}/icon.svg`, type: 'image/svg+xml' },
-    ],
+    icon: { url: `${siteUrl}/favicon.ico`, sizes: 'any' },
     apple: `${siteUrl}/favicon.ico`,
     shortcut: `${siteUrl}/favicon.ico`,
   },
