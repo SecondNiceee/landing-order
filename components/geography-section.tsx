@@ -160,7 +160,7 @@ export function GeographySection() {
             {/* SVG Map */}
             <div className="relative aspect-[4/3] md:aspect-[16/9] p-2 md:p-4">
               <svg
-                viewBox="0 0 1200 550"
+                viewBox="100 100 1050 450"
                 className="w-full h-full"
                 preserveAspectRatio="xMidYMid meet"
               >
