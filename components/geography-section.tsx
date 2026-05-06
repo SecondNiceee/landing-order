@@ -4,13 +4,13 @@ import { motion } from "framer-motion"
 import { MapPin } from "lucide-react"
 import { AnimatedText, AnimatedSection } from "./animated-section"
 
-// City coordinates on the map (relative to viewBox 0 0 1200 600)
+// City coordinates on the map (relative to viewBox 0 0 1200 550)
 const cities = [
   // Northwest
   { x: 85, y: 280, name: "Калининград" },
-  { x: 235, y: 95, name: "Мурманск" },
-  { x: 200, y: 195, name: "Санкт-Петербург" },
-  { x: 310, y: 145, name: "Архангельск" },
+  { x: 195, y: 130, name: "Мурманск" },
+  { x: 200, y: 210, name: "Санкт-Петербург" },
+  { x: 310, y: 160, name: "Архангельск" },
   
   // Central
   { x: 250, y: 275, name: "Москва", isHub: true },
@@ -49,42 +49,42 @@ const murom = { x: 305, y: 280, name: "Муром" }
 
 // Curve offsets for each city to avoid overlaps (positive = curve up/left, negative = curve down/right)
 const curveOffsets: { [key: string]: { intensity: number; direction: number } } = {
-  // Northwest - curve upward to avoid crossing
-  "Калининград": { intensity: 0.5, direction: -1 },
-  "Мурманск": { intensity: 0.3, direction: 1 },
-  "Санкт-Петербург": { intensity: 0.35, direction: -1 },
-  "Архангельск": { intensity: 0.4, direction: 1 },
+  // Northwest - larger curves for outer cities
+  "Калининград": { intensity: 0.85, direction: 1 },
+  "Мурманск": { intensity: 0.65, direction: -1 },
+  "Санкт-Петербург": { intensity: 0.45, direction: 1 },
+  "Архангельск": { intensity: 0.55, direction: -1 },
   
-  // Central - small curves
-  "Москва": { intensity: 0.6, direction: -1 },
-  "Ярославль": { intensity: 0.5, direction: 1 },
-  "Брянск": { intensity: 0.45, direction: 1 },
+  // Central - smaller curves, spread apart
+  "Москва": { intensity: 0.75, direction: 1 },
+  "Ярославль": { intensity: 0.3, direction: -1 },
+  "Брянск": { intensity: 0.7, direction: -1 },
   
-  // South - alternate to avoid crossing
-  "Воронеж": { intensity: 0.35, direction: -1 },
-  "Ростов-на-Дону": { intensity: 0.4, direction: 1 },
-  "Краснодар": { intensity: 0.5, direction: -1 },
-  "Волгоград": { intensity: 0.35, direction: 1 },
+  // South - alternate to avoid crossing with larger offsets
+  "Воронеж": { intensity: 0.5, direction: 1 },
+  "Ростов-на-Дону": { intensity: 0.65, direction: -1 },
+  "Краснодар": { intensity: 0.8, direction: 1 },
+  "Волгоград": { intensity: 0.4, direction: -1 },
   
-  // Volga-Ural - spread out curves
-  "Нижний Новгород": { intensity: 0.4, direction: -1 },
-  "Казань": { intensity: 0.25, direction: 1 },
-  "Самара": { intensity: 0.35, direction: -1 },
-  "Пермь": { intensity: 0.3, direction: 1 },
-  "Екатеринбург": { intensity: 0.2, direction: -1 },
-  "Челябинск": { intensity: 0.35, direction: 1 },
-  "Тюмень": { intensity: 0.25, direction: -1 },
+  // Volga-Ural - spread out curves more
+  "Нижний Новгород": { intensity: 0.25, direction: 1 },
+  "Казань": { intensity: 0.35, direction: -1 },
+  "Самара": { intensity: 0.45, direction: 1 },
+  "Пермь": { intensity: 0.5, direction: -1 },
+  "Екатеринбург": { intensity: 0.35, direction: 1 },
+  "Челябинск": { intensity: 0.55, direction: -1 },
+  "Тюмень": { intensity: 0.4, direction: 1 },
   
-  // Siberia - larger curves for longer distances
-  "Омск": { intensity: 0.2, direction: 1 },
-  "Томск": { intensity: 0.15, direction: -1 },
-  "Новосибирск": { intensity: 0.25, direction: 1 },
-  "Красноярск": { intensity: 0.18, direction: -1 },
+  // Siberia - larger curves for longer distances, alternate directions
+  "Омск": { intensity: 0.3, direction: -1 },
+  "Томск": { intensity: 0.25, direction: 1 },
+  "Новосибирск": { intensity: 0.4, direction: -1 },
+  "Красноярск": { intensity: 0.3, direction: 1 },
   
-  // Far East - distinct curves
-  "Якутск": { intensity: 0.2, direction: 1 },
-  "Хабаровск": { intensity: 0.15, direction: -1 },
-  "Владивосток": { intensity: 0.22, direction: 1 },
+  // Far East - distinct curves with larger offsets
+  "Якутск": { intensity: 0.35, direction: -1 },
+  "Хабаровск": { intensity: 0.25, direction: 1 },
+  "Владивосток": { intensity: 0.4, direction: -1 },
 }
 
 // Generate curved path between two points with custom intensity and direction
@@ -106,26 +106,23 @@ function generateCurvedPath(from: { x: number; y: number }, to: { x: number; y: 
   return `M ${from.x} ${from.y} Q ${ctrlX} ${ctrlY} ${to.x} ${to.y}`
 }
 
-// Russia map outline path (simplified but recognizable)
+// Russia map outline path - more realistic shape without Kaliningrad exclave
 const russiaPath = `
-  M 70,290 
-  L 60,270 L 55,250 L 70,230 L 90,220 L 85,200 L 100,180 
-  L 130,170 L 160,155 L 180,140 L 200,130 L 220,115 L 250,100 
-  L 280,90 L 310,85 L 350,95 L 400,110 L 450,100 L 500,95 
-  L 550,100 L 600,95 L 650,90 L 700,85 L 750,90 L 800,100 
-  L 850,95 L 900,100 L 950,120 L 1000,150 L 1050,180 
-  L 1100,200 L 1130,230 L 1140,270 L 1150,310 L 1140,350 
-  L 1120,390 L 1100,420 L 1130,450 L 1140,480 L 1120,500 
-  L 1080,480 L 1050,450 L 1020,430 L 980,420 L 950,440 
-  L 920,430 L 880,420 L 850,430 L 820,420 L 780,430 
-  L 740,440 L 700,430 L 660,420 L 620,430 L 580,420 
-  L 540,430 L 500,440 L 460,430 L 420,420 L 380,430 
-  L 340,440 L 300,450 L 260,470 L 230,490 L 200,500 
-  L 180,490 L 160,470 L 150,440 L 160,410 L 180,380 
-  L 170,350 L 140,340 L 120,320 L 100,310 L 80,300 
-  L 70,290 Z
-  
-  M 60,280 L 45,275 L 35,290 L 45,310 L 60,305 L 70,290 Z
+  M 150,240 
+  L 145,220 L 155,200 L 175,185 L 195,175 L 180,155 L 200,135 
+  L 225,125 L 255,115 L 285,105 L 320,100 L 360,105 L 410,115 
+  L 455,105 L 505,100 L 555,105 L 605,100 L 655,95 L 705,90 
+  L 755,95 L 805,100 L 855,95 L 905,105 L 955,125 L 1005,155 
+  L 1055,180 L 1100,205 L 1125,235 L 1135,270 L 1145,315 
+  L 1135,355 L 1115,395 L 1095,425 L 1125,455 L 1135,485 
+  L 1115,505 L 1075,485 L 1045,455 L 1015,435 L 975,425 
+  L 945,445 L 915,435 L 875,425 L 845,430 L 815,420 L 775,425 
+  L 735,435 L 695,425 L 655,415 L 615,425 L 575,415 
+  L 535,425 L 495,435 L 455,425 L 415,415 L 375,425 
+  L 335,435 L 295,445 L 255,465 L 225,485 L 195,495 
+  L 175,485 L 155,465 L 145,435 L 155,405 L 175,375 
+  L 165,345 L 135,335 L 115,315 L 120,290 L 135,265 
+  L 150,240 Z
 `
 
 export function GeographySection() {
