@@ -110,7 +110,7 @@ export function HeroSection() {
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 rounded-full shadow-xl shadow-primary/30 h-14 text-base transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40"
             >
-              <a href="#request">Оставить заявку</a>
+              <a href="https://price-mvsp.ru/" target="_blank" rel="noopener noreferrer">Оформить заявку</a>
             </Button>
           </motion.div>
           <motion.div

@@ -88,7 +88,7 @@ export function Header() {
               asChild
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6 rounded-full shadow-lg shadow-primary/25"
             >
-              <a href="#request">Оставить заявку</a>
+              <a href="https://price-mvsp.ru/" target="_blank" rel="noopener noreferrer">Оставить заявку</a>
             </Button>
           </motion.div>
 
@@ -131,7 +131,7 @@ export function Header() {
                 asChild
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full mt-4"
               >
-                <a href="#request">Оставить заявку</a>
+                <a href="https://price-mvsp.ru/" target="_blank" rel="noopener noreferrer">Оставить заявку</a>
               </Button>
             </div>
           </motion.div>
