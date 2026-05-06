@@ -45,8 +45,8 @@ export function Header() {
             whileTap={{ scale: 0.98 }}
           >
             <div className="relative">
-              <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                <Train className="w-5 h-5 text-primary" />
+              <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                <Train className="w-7 h-7 text-primary" />
               </div>
               <div className="absolute -inset-1 bg-primary/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
